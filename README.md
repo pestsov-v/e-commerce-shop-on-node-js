@@ -10,7 +10,7 @@ npm install
 ```
 async function start() {
   try {
-    const url = `mongodb+srv://Vladislav:<password>@back-end-e-commerce-sho.dicb6.mongodb.net/shop`
+    const url = `mongodb+srv://<Your login>:<your password>@back-end-e-commerce-sho.dicb6.mongodb.net/shop`
     await mongoose.connect(url, {
       useNewUrlParser: true,
       useFindAndModify: false
@@ -20,7 +20,7 @@ async function start() {
 ```
 app.use(async (req, res, next) => {
   try {
-    const user = await User.findById('606dd119ab8c103b00686091')
+    const user = await User.findById('Your unique id')
     req.user = user
     next()
   } catch (e) {
@@ -29,13 +29,13 @@ app.use(async (req, res, next) => {
 })
 ```
 
-## You can also change the fields "email" and "name" for your comfortable but this not necessarily.
+## You can also change the fields "Your email" and "Your name" for your comfortable but this not necessarily.
 ```
 const candidate = await User.findOne()
     if (!candidate) {
       const user = new User({
-        email: 'pestsov.js@mail.ru',
-        name: 'Vlad',
+        email: "Your address',
+        name: 'Your name',
         cart: {items: []}
       })
       await user.save()
