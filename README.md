@@ -1,11 +1,11 @@
-# 01-shop
+# back-end-e-commerce-shop writable on Express with MongoDB
 
 ## Project setup
 ```
 npm install
 ```
 
-### Next your need to install one mongoDB atlas account. Create cluster and one user. This user neeeded because we will need a userId in future. Then you need to refactor in index js url adress in variable "url". Nessesary: You need to add a your unique passward in fields passward! This paswward you will get when you registration user in mongoDB Atlas
+## Next your need to install one mongoDB atlas account. Create cluster and one user. This user neeeded because we will need a userId in future. Then you need to refactor in index js url adress in variable "url". Nessesary: You need to add a your unique passward in fields passward! This paswward you will get when you registration user in mongoDB Atlas
 
 ```
 async function start() {
@@ -29,7 +29,7 @@ app.use(async (req, res, next) => {
 })
 ```
 
-### You can also change the fields "email" and "name" for your comfortable but this not necessarily.
+## You can also change the fields "email" and "name" for your comfortable but this not necessarily.
 ```
 const candidate = await User.findOne()
     if (!candidate) {
@@ -42,5 +42,5 @@ const candidate = await User.findOne()
     }
 ```
 
-### At future I will add a container with mongoDB in docker.
+## At future I will add a container with mongoDB in docker.
 
