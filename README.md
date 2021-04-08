@@ -7,7 +7,7 @@ npm install
 
 ### Install one mongoDB atlas account. Create cluster and one user. This user neeeded because our need a userId.
 
-### Then you need to refactor in index js url andress in variable "url". Nessesary: You need to add a your unique passward in fields passward. This paswward you will get when you registration user in mongoDB Atlas
+### Then you need to refactor in index js url adress in variable "url". Nessesary: You need to add a your unique passward in fields passward! This paswward you will get when you registration user in mongoDB Atlas
 
 ```
 async function start() {
