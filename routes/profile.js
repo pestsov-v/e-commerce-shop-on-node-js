@@ -7,7 +7,7 @@ router.get('/', auth, async (req, res) => {
   res.render('profile', {
     title: 'Профиль',
     isProfile: true,
-    user: req.user.toObject()
+    user: req.user.()
   })
 })
 
