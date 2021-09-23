@@ -215,9 +215,7 @@ router.get('/:id', async (req, res) => {
 
 ### Слой "head"
 
-Cлой `head`
-
-Блок кода:
+Полный Блок кода слоя `head`:
 ```handlebars
 <!DOCTYPE html>
 <html lang="en">
@@ -249,9 +247,7 @@ router.get('/', (req, res) => {
 
 ### Слой "navbar"
 
-Cлой `navbar`
-
-Блок кода:
+Полный блок кода слоя `navbar`:
 ```handlebars
 <nav>
   <div class="nav-wrapper">
@@ -309,7 +305,7 @@ Cлой `navbar`
 </nav>
 ```
 Где:
-- `<div>class="nav-wrapper"</div>` - контейнер с классом `nav-wrapper`
+- `<div>class="nav-wrapper"</div>` - контейнер с классом `nav-wrapper`.
 - `<a href="/" class="brand-logo">Магазин курсов</a>` - ссылка ведущая на главную страницу сайта, где тело ссылки `Магазин курсов`.
 - `<ul id="nav-mobile" class="right hide-on-med-and-down">` - список с ID `id="nav-mobile"` и классом `class="right hide-on-med-and-down"`.
 - `{{#if}}` - *возможность шаблонизатора `Handlebars`*. Условие, выполнение которого срабатывает на флаг-переключатель активной страницы.
@@ -343,7 +339,7 @@ Cлой `navbar`
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Слой "footer" 
-
+Полный блок кода слоя `footer`.
 ```handlebars
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="/app.js"></script>
@@ -388,48 +384,48 @@ Cлой `navbar`
 Где:
 - `<h1>Добро пожаловать</h1>` - заголовок страницы.
 
-Конечный вид страницы "Главная":
+Конечный вид представления "Главная":
 
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Курсы
 
-Полный блок кода страницы "Курсы":
+Полный блок кода шаблона `сourses.hbs`:
 ```handlebars
 <h1>Курсы</h1>
 
 {{#if courses.length}}
-{{#each courses}}
-<div class="row">
-  <div class="col s6 offset-s3">
-    <div class="card">
-      <div class="card-image">
-        <img src="{{img}}" alt="{{title}}">
-      </div>
-      <div class="card-content">
-        <span class="card-title">{{title}}</span>
-        <p class="price">{{price}}</p>
-      </div>
-      <div class="card-action actions">
-        <a href="/courses/{{id}}" target="_blank">Открыть курс</a>
-        {{#if @root.isAuth}}
+  {{#each courses}}
+  <div class="row">
+    <div class="col s6 offset-s3">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{img}}" alt="{{title}}">
+        </div>
+        <div class="card-content">
+          <span class="card-title">{{title}}</span>
+          <p class="price">{{price}}</p>
+        </div>
+        <div class="card-action actions">
+          <a href="/courses/{{id}}" target="_blank">Открыть курс</a>
+          {{#if @root.isAuth}}
 
-        {{#ifeq userId._id @root.userId}}
-          <a href="/courses/{{id}}/edit?allow=true">Редактировать</a>
-        {{/ifeq}}
+          {{#ifeq userId._id @root.userId}}
+            <a href="/courses/{{id}}/edit?allow=true">Редактировать</a>
+          {{/ifeq}}
 
-        <form action="/card/add" method="POST">
-          <input type="hidden" name="_csrf" value="{{@root.csrf}}">
-          <input type="hidden" name="id" value="{{id}}">
-          <button type="submit" class="btn btn-primary">Купить</button>
-        </form>
-        {{/if}}
+          <form action="/card/add" method="POST">
+            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+            <input type="hidden" name="id" value="{{id}}">
+            <button type="submit" class="btn btn-primary">Купить</button>
+          </form>
+          {{/if}}
+        </div>
       </div>
     </div>
   </div>
-</div>
-{{/each}}
+  {{/each}}
 {{else}}
 <p>Курсов пока нет</p>
 {{/if}}
@@ -480,13 +476,13 @@ module.exports = {
   - `options.fn(this)` - свойство `fn` объекта `options` передающий контекст функции-обработчика. В примере выше это возможность редактирование данных одного курса.
   - `options.inverse(this)` - свойство `inverse` объекта `options` убирающий контекст функции-обработчика. В примере выше это возможность редактирование данных одного курса.
 
-Конечный вид страницы "Курсы":
+Конечный вид представления "Курсы":
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Добавить курс
 
-Полный блок кода страницы "Добавить курс":
+Полный блок кода шаблона `add.hbs`:
 ```handlebars
 <h1>Добавить новый курс</h1>
 
@@ -529,13 +525,13 @@ module.exports = {
 - `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на права доступа только авторизированому пользователю`{{@root.csrf}}`.
 - `<button class="btn btn-primary">Добавить курс</button>` - Кнопка выполняющая код контроллера запроса `post` по маршруту `'/add'`.
 
-Конечный вид страницы "Добавить курс":
+Конечный вид представления "Добавить курс":
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Профиль
 
-Полный код блока:
+Полный код блока шаблона `profile.hbs`:
 ```handlebars
 <h1>Профиль</h1>
 
@@ -580,53 +576,30 @@ module.exports = {
 </div>
 ```
 Где:
-- `<h1>Профиль</h1>` - 
-- `<div class="row"></div>` -
-- `<form action="/profile" method="POST" enctype="multipart/form-data">` -
-  - `action` - `/profile`
-  - `method` - `POST`
-  - `enctype` - `multipart/form-data`
-- `<p>Ваше email: <strong>{{user.email}}</strong></p>` - 
-  - `{{user.email}}` -
-- `<div class="input-field"></div>` - 
-- `<input id="name" name="name" type="text" class="validate" required value="{{user.name}}">` -
-  - `id` - `name`
-  - `name` - `name`
-  - `type` - `type`
-  - `class` - `validate`
-  - `required value="{{user.name}}"` - `{{user.name}}`
-- `<label for="name">Ваше имя</label>` -
-- `for` - `name`
-- `<span class="helper-text" data-error="Имя не может быть пустым"></span>` -
-  - `class` - `helper-text`
-  - `data-error` - `"Имя не может быть пустым"`
-- `<div class="file-field input-field"></div>` -
-- `<div class="btn"></div>` -
-- `<span>Аватар</span>` -
-- `<input type="file" name="avatar">` -
-  - `type` - `file`
-  - `name` - `avatar`
-- `<div class="file-path-wrapper"></div>` -
-- `<input class="file-path validate" type="text">` -
-  - `class` - `"file-path validate`
-  - `type` - `"text"`
-- `<input type="hidden" name="_csrf" value="{{csrf}}">` - 
-  - `type` - `hidden`
-  - `name` - `_csrf`
-  - `value` - `{{csrf}}`
-- `<button type="submit" class="btn">Изменить</button>` -
-  - `type` - `submit`
-  - `class` - `btn`
-  - `Изменить` -
+- `<h1>Профиль</h1>` - Заголовок страницы "Профиль".
+- `<div class="row"></div>` - контейнер с классом `row` определяющий строку в структуре фреймворка `Materialize CSS`.
+- `<form action="/profile" method="POST" enctype="multipart/form-data">` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/profile'`, который выполняет функции контроллера добавление данных пользователя в его профиль. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/profile'`](controllers.md/#тип-запроса-post-по-маршруту-add).
+  - `enctype="multipart/form-data"` - cвойство которое нужно добавить в HTML форму для корректной работы модуля `multer`.
+- `<p>Ваше email: <strong>{{user.email}}</strong></p>` - параграф с текстом почты пользователя.
+- `<div class="input-field"></div>` - контейнер с классом `iput-field`, который принимает `input` с названием курса. 
+- `<input id="name" name="name" type="text" class="validate" required value="{{user.name}}">` - `input` определяющий ID `id="name"` поля ввода, его название `name="name"`, тип `type="text"`, класс `class="validate"` и обязательные атрибуты данных `required value="{{user.name}}`.
+- `<label for="name">Ваше имя</label>` - Подсказывающий текст `input` определяющийся для `input` с именем `name`.
+- `<span class="helper-text" data-error="Имя не может быть пустым"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Имя не может быть пустым"`.
+- `<div class="btn"></div>` - контейнер с классом `class="btn"` содержащий кнопку.
+- `<span>Аватар</span>` - текстовый контейнер хранящий текст `Аватар`.
+- `<input type="file" name="avatar">` - `input` принимающий тип `type="file"` с названием `name="avatar"`.
+- `<div class="file-path-wrapper"></div>` - контейнер с классом `class="file-path-wrapper"`. 
+- `<input class="file-path validate" type="text">` - `input` принимающий тип пути файла `type="file-path validate"` с названием `name="text"`.
+- `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на права доступа только авторизированому пользователю`{{@root.csrf}}`.
+- `<button type="submit" class="btn">Изменить</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'/profile'`.
 
-
-Конечный вид страницы "Профиль":
+Конечный вид представления "Профиль":
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Корзина
 
-Полный блок кода:
+Полный блок кода шаблона `card.hbs`:
 ```handlebars
 <h1>Корзина</h1>
 
@@ -671,46 +644,31 @@ module.exports = {
 </div>
 ```
 Где:
-- `<h1>Корзина</h1>` - 
-- `<div id="card"></div>` -
-- `{{#if courses.length}}` -
-- `<table></table>` -
-- `<thead></thead>` -
-- `<tr></tr>` -
-- `<th>Название</th>` - 
-- `<th>Количество</th>` -
-- `<th>Действия</th>` -
-- `{{#each courses}}` -
-- `<td>{{title}}</td>` -
-- `<td>{{count}}</td>` - 
-- `<button class="btn btm-small js-remove" data-id="{{id}}" data-csrf="{{@root.csrf}}">Удалить</button>` -
-  - `class` - `"btn btm-small js-remove"`
-  - `data-id` - `{{id}}`
-  - `data-csrf` - `{{@root.csrf}}`
-- `{{/each}}` - 
-- `<p><strong>Цена:</strong> <span class="price">{{price}}</span></p>` -
-  - `{{price}}` -
-- `<form action="/orders" method="POST">` -
-  - `action` - `/orders`
-  - `method` - `POST`
-- `<input type="hidden" name="_csrf" value="{{csrf}}">` -
-  - `type` - `hidden`
-  - `name` - `_csrf`
-  - `value` - `{{csrf}}`
-- `<button type="submit" class="btn">Сделать заказ</button>` - 
-- `type` - `submit`
-- `class` - `btn`
-- `Сделать заказ` -
-- `{{else}}` -
-- `<p>Корзина пуста</p>` - 
-- `{{/if}}` - 
+- `<h1>Корзина</h1>` - заголовок страницы "Корзина".
+- `<div id="card"></div>` - контейнер с ID `id="card"`.
+- `{{#if courses.length}}` - условие, которое выполняется при условии, если есть хотя бы один курс `courses.length`
+- `<table></table>` - тег таблицы.
+- `<thead></thead>` - тег заголовка таблицы.
+- `<tr></tr>` - тег одной строчки таблицы.
+- `<th>Название</th>` - тег заголовка колонки таблицы "Название".
+- `<th>Количество</th>` - тег заголовка колонки таблицы "Количество".
+- `<th>Действия</th>` - тег заголовка колонки таблицы "Действия".
+- `{{#each courses}}` - условие, которое выполняется для каждого курса в массиве курсов `courses`.
+- `<td>{{title}}</td>` - название курса.
+- `<td>{{count}}</td>` - количество единиц одного курса.
+- `<button class="btn btm-small js-remove" data-id="{{id}}" data-csrf="{{@root.csrf}}">Удалить</button>` - кнопка удаляющая один курс по его ID `data-id="{{id}}"` и с дополнительной проверкой на предмет авторизации пользователя `data-csrf="{{@root.csrf}}`.
+- `{{/each}}` - *возможность шаблонизатора `Handlebars`*. Закрытие условия `each`.
+- `<p><strong>Цена:</strong> <span class="price">{{price}}</span></p>` - текстовый контейнер выводящий итоговую стоимость `{{price}}`.
+- `<form action="/orders" method="POST">` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/orders'`, который выполняет функции контроллера добавление одного заказа. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/orders'`](controllers.md/#тип-запроса-post-по-маршруту-cardadd).
+- `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на права доступа только авторизированому пользователю`{{@root.csrf}}`.
+- `<button type="submit" class="btn">Сделать заказ</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'/orders'`.
 
-Конечный вид страницы "Корзина":
+Конечный вид представления "Корзина":
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Заказы
-Полный код блока: 
+Полный код блока шаблона `orders.hbs`: 
 ```handlebars
 <h1>Мои заказы</h1>
 
@@ -747,36 +705,23 @@ module.exports = {
 {{/if}}
 ```
 Где:
-- `<h1>Мои заказы</h1>` -
-- `{{#if orders.length}}` -
-- `{{#each orders}}` -
-- `<div class="row"></div>` -
-- `<div class="col s6 offset-s3"></div>` -
-- `<div class="card"></div>` -
-- `<div class="card-content"></div>` -
-- `<span class="card-title">Заказ</span>` -
-- `<small>{{_id}}</small>` -
-- `<p class="date">{{date}}</p>` -
-  - `class` - `date`
-  - `{{date}}` -
-- `<p><em>{{user.userId.name}}</em> ({{user.userId.email}})</p>` -
-  - `{{user.userId.name}}` -
-  - `{{user.userId.email}}` -
-- `<ol></ol>` -
-- `{{#each courses}}` -
-- `<li></li>` -
-- `{{course.title}} (x<strong>{{count}}</strong>)` -
-  - `{{course.title}}` -
-  - `{{count}}` -
-- `{{/each}}` - 
-- `<p>Цену: <span class="price">{{price}}</span></p>` -
-  - `class` - `price`
-  - `{{price}}` -
-- `{{else}}` -
-- `<p>Заказов пока нет</p>` - 
-- `{{/if}}` - 
+- `<h1>Мои заказы</h1>` - Заголовок страницы "Заказы".
+- `{{#if orders.length}}` - условие, которое выполняется при условии, если есть хотя бы один заказ `orders.length}`
+- `{{#each orders}}` - условие, которое выполняется для каждого заказа в массиве заказов `orders`.
+- `<div class="row"></div>` - контейнер с классом `row` определяющий строку.
+- `<div class="col s6 offset-s3"></div>` - контейнер с классом `col s6 offset-s3` определяющий ширину колонки `col s6` и отступ от краёв адаптивной сетки `offset-s3` в структуре фреймворка `Materialize CSS`.
+- `<div class="card"></div>` - контейнер с классом `card` определяющий карточку.
+- `<div class="card-content"></div>` - контейнер с классом `card-content` определяющий наполнение карточки.
+- `<span class="card-title">Заказ</span>` - текстовый контейнер с классом `class="card-title"` определяющий заголовок, текст которого `Заказ`.
+- `<small>{{_id}}</small>` - уникальный ID заказа.
+- `<p class="date">{{date}}</p>` - параграф с классом `class="date"` определяющий дату выдачи заказа.
+- `<p><em>{{user.userId.name}}</em> ({{user.userId.email}})</p>` - параграф определяющий имя пользователя и его почту в скобках.
+- `{{#each courses}}` -  условие, которое выполняется для каждого заказа в массиве курсов `courses`.
+- `<li></li>` - нумерованый список курсов.
+- `{{course.title}} (x<strong>{{count}}</strong>)` - выводит название курса `{{course.title}}` и в скобках количество единиц этого курса `{{count}}`.
+- `<p>Цену: <span class="price">{{price}}</span></p>` - текстовый параграф, который выводит итоговую стоимость всех курсов `{{price}}`.
 
-Конечный вид страницы "Заказы":
+Конечный вид представления "Заказы":
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
@@ -784,7 +729,7 @@ module.exports = {
 
 
 #### Вход / Регистрация
-Полный блок кода:
+Полный блок кода шаблона `auth/login.hbs`:
 ```handlebars
 <div class="auth">
     <div class="row">
@@ -863,36 +808,23 @@ module.exports = {
 ```
 Где:
 *1. Раздел "Логин"*
-  - `<li class="tab col s6"><a class="active" href="#login">Войти</a></li>` - 
-  - `<li class="tab col s6"><a class="active" href="#register">Регистрация</a></li>` -
-  - `{{#if loginError}}` -
-  - `<p class="alert">{{loginError}}</p>` -
-  - `{{/if}}` -
-  - `<h2>Войти в магазин</h2>` -
-  - `<form action="/auth/login" method="POST">` -
-  - `<div class="input-field"></div>` -
-  - `<input id="email" name="email" type="email" class="validate" required>` -
-  - `<label for="email">Email</label>` -
-  - `<span class="helper-text" data-error="Введите email"></span>` -
-  - `<div class="input-field"></div>` -
-  - `<input id="password" name="password" type="password" class="validate" required>` -
-  - `<label for="password">Пароль</label>` -
-  - `<span class="helper-text" data-error="Введите пароль"></span>` - 
-  - `<input type="hidden" name="_csrf" value="{{csrf}}">` -
-  - `<button class="btn btn-primary" type="submit">Войти</button>` -
-  - `<p><a href="/auth/reset">Забыли пароль?</a></p>` - 
+  - `<li class="tab col s6"><a class="active" href="#login">Войти</a></li>` -  элемент списка с классом `class="tab col s6"` занимающий половину адаптивной разметки и содержащий ссылку на графу `Войти` - `href="#login"`.
+  - `<li class="tab col s6"><a class="active" href="#register">Регистрация</a></li>` -  элемент списка с классом `class="tab col s6"` занимающий половину адаптивной разметки и содержащий ссылку на графу `Регистрация` - `href="#login"`.
+  - `{{#if loginError}}` - условие, которое выполняется при ошибке ввода логика `loginError`.
+  - `<form action="/auth/login" method="POST">` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/auth/login'`, который выполняет функции контроллера ввода данных пользователя для авторизации на сайте. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/login'`](controllers.md/#тип-запроса-post-по-маршруту-authlogin).
+  - `<input id="email" name="email" type="email" class="validate" required>` - `input` определяющий ID `id="email"` поля ввода, его название `name="email"`, тип `type="email"`, класс `class="validate"` и обязательным атрибутом `required`, который выдаст ошибку в случае, если поле `email` будет пустым.
+  - `<label for="email">Email</label>` - подсказывающий текст `input` определяющийся для `input` с именем `Email`.
+  - `<span class="helper-text" data-error="Введите email"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Введите email"`.
+  - `<input id="password" name="password" type="password" class="validate" required>` - `input` определяющий ID `id="password"` поля ввода, его название `name="password"`, тип `type="password"`, класс `class="validate"` и обязательным атрибутом `required`, который выдаст ошибку в случае, если поле `password` будет пустым.
+  - `<label for="password">Пароль</label>` - подсказывающий текст `input` определяющийся для `input` с именем `password`.
+  - `<span class="helper-text" data-error="Введите пароль"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Введите пароль"`.
+  - `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на права доступа только авторизированому пользователю`{{@root.csrf}}`.
+  - `<button class="btn btn-primary" type="submit">Войти</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'/auth/login'`.
+  - `<p><a href="/auth/reset">Забыли пароль?</a></p>` - ccылка введующая на страницу "Сброса пароля".
+  - 
 *2. Раздел "Регистрация"*
-  - `{{#if registerError}}` -
-  - `<p class="alert">{{registerError}}</p>` -
-  - `{{/if}}` -
-  - `<h2>Создать аккаунт</h2>` -
-  - `<form action="/auth/register" method="POST" novalidate>` -
-  - `<div class="input-field"></div>` -
-  - `<input id="remail" name="email" type="email" class="validate" required>` -
-  - `<label for="remail">Email</label>` -
-  - `<span class="helper-text" data-error="Введите email"></span>` -
-  - `<input type="hidden" name="_csrf" value="{{csrf}}">` -
-  - `<button class="btn btn-primary" type="submit">Зарегистрироваться</button>` -
+  - `{{#if registerError}}` - условие, которое выполняется при ошибке ввода логика `registerError`
+  - `<form action="/auth/register" method="POST" novalidate>` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/auth/register'`, который выполняет функции контроллера добавление данных пользователя в базу данных. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/register'`](controllers.md/#тип-запроса-post-по-маршруту-authregister).
 
 Конечный вид страницы "Логин":
 
@@ -901,7 +833,7 @@ module.exports = {
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 #### Сброс пароля
-Полный код блока:
+Полный код блока `password.hbs`:
 ```handlebars
 <div class="row">
     <div class="col s6 offset-s3">
@@ -923,23 +855,20 @@ module.exports = {
 </div>
 ```
 Где:
-- `{{#if error}}` -
-- `<p class="alert">{{error}}</p>` -
-- `{{/if}}` -
-- `<h2>Забыли пароль?</h2>` -
-- `<div class="input-field"></div>` -
-- `<input id="email" name="email" type="email" class="validate" required>` -
-- `<label for="email">Email</label>` -
-- `<span class="helper-text" data-error="Введите email"></span>` -
-- `<input type="hidden" name="_csrf" value="{{csrf}}">` -
-- `<button class="btn btn-primary" type="submit">Cбросить</button>` -
+- `{{#if error}}` - условие, которое выполняется при ошибке ввода логика `error`.
+- `<form action="/auth/reset" method="POST"`> - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/auth/login'`, который выполняет функции контроллера cброса пароля. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/reset'`](controllers.md/#тип-запроса-post-по-маршруту-authreset).
+- `<input id="email" name="email" type="email" class="validate" required>` - `input` определяющий ID `id="email"` поля ввода, его название `name="email"`, тип `type="email"`, класс `class="validate"` и обязательным атрибутом `required`, который выдаст ошибку в случае, если поле `email` будет пустым.
+- `<label for="email">Email</label>` - подсказывающий текст `input` определяющийся для `input` с именем `Email`.
+- `<span class="helper-text" data-error="Введите email"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Введите email"`.
+- `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на права доступа только авторизированому пользователю`{{@root.csrf}}`.
+- `<button class="btn btn-primary" type="submit">Cбросить</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'/auth/reset'`.
 
 Конечный вид страницы "Сброс пароля":
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 #### Смена пароля
-Полный код блока:
+Полный код блока шаблона `reset.hbs`:
 ```handlebars
 <div class="row">
     <div class="col s6 offset-s3">
@@ -963,19 +892,15 @@ module.exports = {
 </div>
 ```
 Где:
-- `{{#if error}}` -
-- `<p class="alert">{{error}}</p>` -
-- `{{/if}}` -
-- `<h2>Задать новый пароль</h2>` -
-- `<form action="/auth/password" method="POST"></form>` -
-- `<div class="input-field"></div>` -
-- `<input id="password" name="password" type="password" class="validate" required>` -
-- `<label for="password">Новый пароль</label>` -
-- `<span class="helper-text" data-error="Введите пароль"></span>` -
-- `<input type="hidden" name="_csrf" value="{{csrf}}">` -
-- `<input type="hidden" name="userId" value="{{userId}}">` -
-- `<input type="hidden" name="token" value="{{token}}">` -
-- `<button class="btn btn-primary" type="submit">Обновить пароль</button>` -
+- `{{#if error}}` - условие, которое выполняется при ошибке ввода логика `error`.
+- `<form action="/auth/password" method="POST"></form>` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/auth/password'`, который выполняет функции контроллера cмены пароля. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/password'`](controllers.md/#тип-запроса-post-по-маршруту-authpassword).
+- `<input id="password" name="password" type="password" class="validate" required>` - `input` определяющий ID `id="password"` поля ввода, его название `name="password"`, тип `type="password"`, класс `class="validate"` и обязательным атрибутом `required`, который выдаст ошибку в случае, если поле `password` будет пустым.
+- `<label for="password">Новый пароль</label>` - подсказывающий текст `input` определяющийся для `input` с именем `password`.
+- `<span class="helper-text" data-error="Введите пароль"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Введите пароль"`.
+- `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на права доступа только авторизированому пользователю`{{@root.csrf}}`.
+- `<input type="hidden" name="userId" value="{{userId}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на проверку ID пользователя`{{userId}}`.
+- `<input type="hidden" name="token" value="{{token}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик токена пользователя `{{token}}`.
+- `<button class="btn btn-primary" type="submit">Обновить пароль</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'/auth/password'`
 
 Конечный вид страницы "Cмена пароля":
 
@@ -995,7 +920,7 @@ module.exports = {
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Страница одного курса
-Полный код блока:
+Полный код блока шаблона `courses.hbs`:
 ```handlebars
 <div class="course">
   <h1>{{course.title}}</h1>
@@ -1006,16 +931,16 @@ module.exports = {
 </div>
 ```
 Где:
-- `<h1>{{course.title}}</h1>` -
-- `<img src="{{course.img}}" alt="{{course.title}}">` -
-- `<p class="price big">{{course.price}}</p>` -
+- `<h1>{{course.title}}</h1>` - заголовок с названием курса `{{course.title}}`
+- `<img src="{{course.img}}" alt="{{course.title}}">` - картинка курса `{{course.img}}` с названием заголовка курса `{{course.title}}`.
+- `<p class="price big">{{course.price}}</p>` - параграф с классом `class="price big"` показывающий цену курса `{{course.price}}`.
 
 Конечный вид страницы одного курса:
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Редактировать курс
-Полный блок кода:
+Полный блок кода шаблона `course-edit.hbs`:
 ```handlebars
 <h1>Редактировать {{course.title}}</h1>
 
@@ -1051,32 +976,24 @@ module.exports = {
 </form>
 ```
 Где:
-- `<h1>Редактировать {{course.title}}</h1>` -
-- `<form action="/courses/edit" method="POST" class="course-form"></form>` -
-- `<div class="input-field"></div>` -
-- `<input id="title" name="title" type="text" class="validate" required value="{{course.title}}">` -
-- `<label for="title">Название курса</label>` -
-- `<span class="helper-text" data-error="Введите название"></span>` -
-- `<input id="price" name="price" type="number" class="validate" required min="1"  value="{{course.price}}">` -
-- `<label for="price">Цена курса</label>` -
-- `<span class="helper-text" data-error="Введите цену"></span>` -
-- `<input id="img" name="img" type="text" class="validate" required  value="{{course.img}}">` -
-- `<label for="img">URL картинки</label>` -
-- `<span class="helper-text" data-error="Введите url картинки"></span>` -
-- `<input type="hidden" name="id" value="{{course.id}}">` -
-- `<input type="hidden" name="_csrf" value="{{csrf}}">` -
-- `<button type="submit" class="btn btn-primary">Редактировать курс</button>` -
-- `<form action="/courses/remove" method="POST"></form>` -
-- `<input type="hidden" name="_csrf" value="{{csrf}}">` -
-- `<input type="hidden" name="id" value="{{ course.id }}">` -
-- `<button class="btn red">Удалить курс</button>` -
+- `<h1>Редактировать {{course.title}}</h1>` - заголовок редактирование одного курса.
+- `<form action="/courses/edit" method="POST" class="course-form"></form>` -  *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/courses/edit'`, который выполняет функции контроллера cмены пароля. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/password'`](controllers.md/#тип-запроса-get-по-маршруту-coursesidedit).
+- `<div class="input-field"></div>` - контейнер с классом `iput-field`, который принимает `input` с названием курса. 
+- `<input id="title" name="title" type="text" class="validate" required value="{{course.title}}">` - `input` определяющий ID `id="title"` поля ввода, его название `name="title"`, тип `type="text"`, класс `class="validate"` и обязательным атрибутом `required`, который должен наличивать значение заголовка курса `{{course.title}}`.
+- `<label for="title">Название курса</label>` - подсказывающий текст `Название курса` определяющийся для `input` с именем `title`.
+- `<span class="helper-text" data-error="Введите название"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Введите название"`.
+- `<input id="price" name="price" type="number" class="validate" required min="1" value="{{course.price}}">` - `input` определяющий ID `id="price"` поля ввода, его название `name="price"`, тип `type="number"`, класс `class="validate"` и обязательным атрибутом `required`, который должен наличивать значение заголовка курса `{{course.title}}` и быть в количестве не меньше 1 `min="1"`.
+- `<input type="hidden" name="id" value="{{course.id}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на проверку ID курса `{{@root.csrf}}`.
+- `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик на права доступа только авторизированому пользователю `{{@root.csrf}}`.
+- `<button type="submit" class="btn btn-primary">Редактировать курс</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'/courses/edit'`.
+- `<form action="/courses/remove" method="POST"></form>` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/courses/edit'`, который выполняет функции контроллера cмены пароля. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/password'`](controllers.md/#тип-запроса-post-по-маршруту-coursesremove).
 
 Конечный вид страницы "Редактировать курс":
 
 ⬆️ [К оглавлению раздела "Представления"](#оглавление-раздела) <br/>
 
 ### Страница 404
-Полный блок кода:
+Полный блок кода шаблона `404.hbs`:
 ```handlebars
 <h1>404 Ошибка</h1>
 <p>Страница не найдена</p>
@@ -1085,9 +1002,9 @@ module.exports = {
 <a href="/">Вернуться на главную страницу</a>
 ```
 Где:
-- `<h1>404 Ошибка</h1>` -
-- `<p>Страница не найдена</p>` -
-- `<a href="/">Вернуться на главную страницу</a>` -
+- `<h1>404 Ошибка</h1>` - заголовок страницы `404`.
+- `<p>Страница не найдена</p>` - Параграф с текстом `Страница не найдена`.
+- `<a href="/">Вернуться на главную страницу</a>` - ccылкав ведущая на главную страницу сайта.
 
 Конечный вид страницы "Страница 404":
 
