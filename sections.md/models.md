@@ -458,7 +458,7 @@ module.exports = model('User', userSchema)
 - `removeFromCart` - метод удаляющий курс из массива корзины.
 - `clearCart` - метод очищающий корзину пользователя после сформирование и отправки заказа пользователя.
 
-*Кода функции `addToCart`:*  <br/>
+*Код функции `addToCart`:*  <br/>
 ```node
 userSchema.methods.addToCart = function(course) {
   const items = [...this.cart.items]
@@ -493,7 +493,7 @@ userSchema.methods.addToCart = function(course) {
 - `this.cart` - ключ переопределяющий значение объекта `{items}`, как новый объект контекста корзины, где `this.cart` является аналогичным записи `course.cart`. <br/>
 - `return this.save()` -  метод `save` сохроняет состояние корзины в базе данных у модели `User`, а именно оновленный массив в поле `cart = []` модели `User` после чего `return` возвращает со
 
-*Кода функции `removeFromCart`*: <br/>
+*Код функции `removeFromCart`*: <br/>
 ```node
 userSchema.methods.removeFromCart = function(id) {
   let items = [...this.cart.items]
@@ -521,7 +521,7 @@ userSchema.methods.removeFromCart = function(id) {
 - `return this.save()` -  метод `save` сохроняет состояние корзины в базе данных у модели `User`, а именно оновленный массив в поле `cart = []` модели `User` после чего `return` возвращает сохранённое значение как результат выполнения функции.  <br/>
 
 
-*Кода функции `clearCart`*: <br/>
+*Код функции `clearCart`*: <br/>
 ```node
 userSchema.methods.clearCart = function() {
   this.cart = {items: []}

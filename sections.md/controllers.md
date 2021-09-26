@@ -893,7 +893,7 @@ const user = await req.user
 - `price` - ключ принимающий результат функции `computePrice`. <br/>
 - `computePrice()` - функция принимающая массив курсов `'courses'` для последующего расчёта внутри функции `computePrice()`. <br/>
 
-*Блок кода функции `computePrice()`* <br/>
+*Код функции `computePrice()`* <br/>
 ```node
 function computePrice(courses) {
   return courses.reduce((total, course) => {
@@ -960,7 +960,7 @@ res.redirect('/card')
 - `req.user.addToCart()` - функция модели `User` - `addToCart` принимающая аргумент - `course`. Код функции указан ниже. <br/>
 - `res.redirect()` - метод `redirect` объекта ответа `response` перенаправление на страницу с маршрутом `'/card'`. <br/>
 
-*Блок кода функции `addToCart`* <br/>
+*Код функции `addToCart`* <br/>
 ```node
 userSchema.methods.addToCart = function(course) {
   const items = [...this.cart.items]
@@ -1025,7 +1025,7 @@ await req.user.removeFromCart(req.params.id)
 Где: <br/>
 - `req.user.removeFromCart()` -  функция модели `User` - `removeFromCart` принимающая аргумент - `req.params.id` и результат которой это удаление курса по ID, который приходит в запросе. Код функции указан ниже: <br/>
 
-*Блок кода функции `removeFromCart()`* <br/>
+*Код функции `removeFromCart()`* <br/>
 ```node
 userSchema.methods.removeFromCart = function(id) {
   let items = [...this.cart.items]
@@ -1075,7 +1075,7 @@ const cart = {
   - `price` - ключ принимающий значение результата выполнения функции `computePrice()`, которая принимает значение `courses`. Логика кода с подробным объяснением функции смотрите []. <br/>
 - `res.status(200).json(cart)` - метод `status` объекта `response` принимающий значение кода отправки сервера `200` и объект корзины `cart` преобразованной в формат `json`. <br/>
 
-*Блок кода функции `mapCartItems()`* <br/>
+*Код функции `mapCartItems()`* <br/>
 ```node
 function mapCartItems(cart) {
   return cart.items.map(c => ({
@@ -1299,7 +1299,7 @@ router.post('/', auth, async (req, res) => {
 - `req.user.clearCart()` - функция модели `User` - `clearCart`. Код функции указан ниже. <br/>
 - `res.redirect()` - метод `redirect` объекта ответа `response` перенаправление на страницу с маршрутом `'/orders'`. <br/>
 
-*Блок кода функции `clearCart`:* <br/>
+*Код функции `clearCart`:* <br/>
 ```node
 userSchema.methods.clearCart = function() {
   this.cart = {items: []}
