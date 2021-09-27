@@ -103,7 +103,7 @@ router.get('/', auth, (req, res) => {
   - `auth` - промежуточный обработчик авторизации. <br/>
   - `req` - объект запроса. <br/>
   - `res` - объект ответа. <br/>
-- `res.render('add', {})` - функция визуализации `render` объекта ответа `res`, которая принимает три параметра: <br/>
+- `res.render('add', {})` - функция визуализации `render` объекта ответа `res`, которая принимает три аргумента: <br/>
     - `add` - обязательный параметр. Определяет код визуализации. В нашем случае код визуализации - страница `add` шаблонизатора `Handlebars`. Код визуализации может быть также строкой. <br/>
     - `{}` - необязательный параметр. Объект с локальными данными, которые передаються объектом `res` в шаблон `add`. <br/>
     - `function () {}` - необязательный параметр. Callback функция. <br/>
@@ -472,12 +472,12 @@ router.get('/', (req, res) => {
   - `/courses/{{id}}` - *возможность шаблонизатора `Handlebars`*. Маршрут страницы одного курса. <br/>
 - `{{#if}} @root.isAuth` - *возможность шаблонизатора `Handlebars`*. Условие проверки авторизации пользователя `@root.isAuth` при которое, `isAuth === true` выполняется тело условия. 
 - `{{/if}}` - *возможность шаблонизатора `Handlebars`*. Закрытие условия. <br/>
-- `{{#ifeq userId._id @root.userId}}` - *возможность шаблонизатора `Handlebars`*. Промежуточный обработчик `ifeq` передающийся в базовых параметрах `hbs` в главном файле `index.js`. Код промежуточного обработчика указан ниже. <br/>
+- `{{#ifeq userId._id @root.userId}}` - *возможность шаблонизатора `Handlebars`*. Промежуточный обработчик `ifeq` передающийся в базовых аргументах `hbs` в главном файле `index.js`. Код промежуточного обработчика указан ниже. <br/>
   -  `userId._id` - ID пользователя который хранится в базе данных `MongoDB`. <br/>
   -  `@root.userId` - ID пользователя, который авторизировался на сайте. <br/>
 - `<a href="/courses/{{id}}/edit?allow=true">Редактировать</a>` - ссылка на редактирование данных одного курса. <br/>
   - `/courses/{{id}}/edit?allow=true` - URL-путь редактирование данных одного курса. <br/>
-- `<form action="/card/add" method="POST">` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'card/add'`, который выполняет функции контроллера добавление одного курса в корзину. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/card/add'`](controllers.md/#тип-запроса-post-по-маршруту-cardadd). <br/>
+- `<form action="/card/add" method="POST">` - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'card/add'`, который выполняет функции контроллера добавление одного курса в корзину. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/card/add'`](controllers.md/#метод-запроса-post-по-маршруту-cardadd). <br/>
 - `<input type="hidden" name="_csrf" value="{{@root.csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик прав доступа авторизации `{{@root.csrf}}`. <br/>
 - `<input type="hidden" name="id" value="{{id}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик значения `{{id}}`. <br/>
 - `<button type="submit" class="btn btn-primary">Купить</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'card/add'`. <br/>
@@ -495,7 +495,7 @@ module.exports = {
 }
 ```
 Где: <br/>
-- `ifeq(a, b, options) {}` - функция `ifeq` принимающая два параметра. <br/>
+- `ifeq(a, b, options) {}` - функция `ifeq` принимающая два аргумента. <br/>
   - `a` - параметр, принимающий в примере выше `userId._id`. <br/>
   - `b` - параметр, принимающий в примере выше `@root.userId`. <br/>
   - `options` - передаваемые функция, метод, данные и т.д. <br/>
@@ -548,7 +548,7 @@ module.exports = {
 - `{{#if error}}` - условие, при котором выполняется текст ошибки. <br/>
   - `<p class="alert">{{error}}</p>` - параграф с классом `alert` с текстом ошибки `{{error}}`. <br/>
 - `{{/if}}` - *возможность шаблонизатора `Handlebars`*. Закрытие блока сравнения. <br/>
-- `<form action="/add" method="POST"></form>` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/add/'`, который выполняет функции контроллера добавление одного курса в базу данных. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/add'`](controllers.md/#тип-запроса-post-по-маршруту-add).
+- `<form action="/add" method="POST"></form>` - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/add/'`, который выполняет функции контроллера добавление одного курса в базу данных. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/add'`](controllers.md/#метод-запроса-post-по-маршруту-add).
 - `<div class="input-field"></div>` - контейнер с классом `iput-field`, который принимает `input` с названием курса. <br/>
 - `<input id="title" name="title" type="text" class="validate" required value="{{data.title}}">` - `input` содержащий ID `id="title"` поля ввода, его название `name="title"`, тип `type="text"`, класс `class="validate"` и обязательный атрибут данных `required value="{{data.title}}`. <br/>
 - `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик прав доступа авторизации `{{@root.csrf}}`. <br/>
@@ -609,7 +609,7 @@ module.exports = {
 Где: <br/>
 - `<h1>Профиль</h1>` - заголовок страницы "Профиль". <br/>
 - `<div class="row"></div>` - контейнер с классом `row` содержащий строку. <br/>
-- `<form action="/profile" method="POST" enctype="multipart/form-data">` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/profile'`, который выполняет функции контроллера добавление данных пользователя в его профиль. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/profile'`](controllers.md/#тип-запроса-post-по-маршруту-add). <br/>
+- `<form action="/profile" method="POST" enctype="multipart/form-data">` - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/profile'`, который выполняет функции контроллера добавление данных пользователя в его профиль. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/profile'`](controllers.md/#метод-запроса-post-по-маршруту-add). <br/>
   - `enctype="multipart/form-data"` - cвойство которое добавляется в HTML форму для корректной работы модуля `multer`. <br/>
 - `<p>Ваше email: <strong>{{user.email}}</strong></p>` - параграф с текстом почты пользователя. <br/>
 - `<div class="input-field"></div>` - контейнер с классом `iput-field`, который принимает `input` с названием курса. <br/> 
@@ -692,7 +692,7 @@ module.exports = {
 - `<button class="btn btm-small js-remove" data-id="{{id}}" data-csrf="{{@root.csrf}}">Удалить</button>` - кнопка удаляющая один курс по его ID `data-id="{{id}}"` с проверкой авторизации пользователя `data-csrf="{{@root.csrf}}`. <br/>
 - `{{/each}}` - *возможность шаблонизатора `Handlebars`*. Закрытие условия `each`. <br/>
 - `<p><strong>Цена:</strong> <span class="price">{{price}}</span></p>` - текстовый контейнер выводящий итоговую стоимость `{{price}}`. <br/>
-- `<form action="/orders" method="POST">` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/orders'`, который выполняет функции контроллера добавление одного заказа. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/orders'`](controllers.md/#тип-запроса-post-по-маршруту-cardadd). <br/>
+- `<form action="/orders" method="POST">` - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/orders'`, который выполняет функции контроллера добавление одного заказа. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/orders'`](controllers.md/#метод-запроса-post-по-маршруту-cardadd). <br/>
 - `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик прав доступа авторизации `{{@root.csrf}}`.
 - `<button type="submit" class="btn">Сделать заказ</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'/orders'`. <br/>
 
@@ -860,7 +860,7 @@ module.exports = {
   - `<li class="tab col s6"><a class="active" href="#login">Войти</a></li>` -  элемент списка с классом `class="tab col s6"` занимающий половину адаптивной разметки и содержащий ссылку на графу `Войти` - `href="#login"`. <br/>
   - `<li class="tab col s6"><a class="active" href="#register">Регистрация</a></li>` -  элемент списка с классом `class="tab col s6"` занимающий половину адаптивной разметки и содержащий ссылку на графу `Регистрация` - `href="#login"`. <br/>
   - `{{#if loginError}}` - условие, которое выполняется при ошибке ввода логина `loginError`. <br/>
-  - `<form action="/auth/login" method="POST">` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/auth/login'`, который выполняет функции контроллера ввода данных пользователя для авторизации на сайте. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/login'`](controllers.md/#тип-запроса-post-по-маршруту-authlogin). <br/>
+  - `<form action="/auth/login" method="POST">` - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/auth/login'`, который выполняет функции контроллера ввода данных пользователя для авторизации на сайте. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/auth/login'`](controllers.md/#метод-запроса-post-по-маршруту-authlogin). <br/>
   - `<input id="email" name="email" type="email" class="validate" required>` - `input` содержащий ID `id="email"` поля ввода, его название `name="email"`, тип `type="email"`, класс `class="validate"` и обязательный атрибут `required`, который выдаст ошибку в случае, если поле `email` будет пустым. <br/>
   - `<label for="email">Email</label>` - подсказывающий текст `input` определяющийся для `input` с именем `Email`. <br/>
   - `<span class="helper-text" data-error="Введите email"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Введите email"`. <br/>
@@ -873,7 +873,7 @@ module.exports = {
   - 
 *2. Раздел "Регистрация"* <br/>
   - `{{#if registerError}}` - условие, которое выполняется при ошибке ввода почты без формата почты `registerError`. <br/>
-  - `<form action="/auth/register" method="POST" novalidate>` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/auth/register'`, который выполняет функции контроллера добавление нового пользователя в базу данных. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/register'`](controllers.md/#тип-запроса-post-по-маршруту-authregister). <br/>
+  - `<form action="/auth/register" method="POST" novalidate>` - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/auth/register'`, который выполняет функции контроллера добавление нового пользователя в базу данных. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/auth/register'`](controllers.md/#метод-запроса-post-по-маршруту-authregister). <br/>
 
 Итоговый вид страницы "Логин": <br/>
 
@@ -908,7 +908,7 @@ module.exports = {
 ```
 Где: <br/>
 - `{{#if error}}` - условие, которое выполняется при ошибке ввода логика `error`. <br/>
-- `<form action="/auth/reset" method="POST"`> - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/auth/login'`, который выполняет функции контроллера cброса пароля. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/reset'`](controllers.md/#тип-запроса-post-по-маршруту-authreset). <br/>
+- `<form action="/auth/reset" method="POST"`> - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/auth/login'`, который выполняет функции контроллера cброса пароля. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/auth/reset'`](controllers.md/#метод-запроса-post-по-маршруту-authreset). <br/>
 - `<input id="email" name="email" type="email" class="validate" required>` - `input` содержащий ID `id="email"` поля ввода, его название `name="email"`, тип `type="email"`, класс `class="validate"` и обязательный атрибут `required`, который выдаст ошибку в случае, если поле `email` будет пустым. <br/>
 - `<label for="email">Email</label>` - подсказывающий текст `Email` определяющийся для `input` с именем `Email`. <br/>
 - `<span class="helper-text" data-error="Введите email"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Введите email"`. <br/>
@@ -948,7 +948,7 @@ module.exports = {
 ```
 Где:<br/>
 - `{{#if error}}` - условие, которое выполняется при ошибке ввода логика `error`. <br/>
-- `<form action="/auth/password" method="POST"></form>` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/auth/password'`, который выполняет функции контроллера cмены пароля. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/auth/password'`](controllers.md/#тип-запроса-post-по-маршруту-authpassword). <br/>
+- `<form action="/auth/password" method="POST"></form>` - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/auth/password'`, который выполняет функции контроллера cмены пароля. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/auth/password'`](controllers.md/#метод-запроса-post-по-маршруту-authpassword). <br/>
 - `<input id="password" name="password" type="password" class="validate" required>` - `input` содержащий ID `id="password"` поля ввода, его название `name="password"`, тип `type="password"`, класс `class="validate"` и обязательный атрибут `required`, который выдаст ошибку в случае, если поле `password` будет пустым. <br/>
 - `<label for="password">Новый пароль</label>` - подсказывающий текст `Новый пароль` определяющийся для `input` с именем `password`. <br/>
 - `<span class="helper-text" data-error="Введите пароль"></span>` - текстовый контейнер с классом `class="helper-text"` который всплывает в случае ошибки и выводит текст ошибки `data-error="Введите пароль"`. <br/>
@@ -1039,7 +1039,7 @@ module.exports = {
 ```
 Где: <br/>
 - `<h1>Редактировать {{course.title}}</h1>` - заголовок редактирование одного курса. <br/>
-- `<form action="/courses/edit" method="POST" class="course-form"></form>` -  *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/courses/edit'`, который выполняет функции контроллера редактирования курса. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/courses/edit'`](controllers.md/#тип-запроса-get-по-маршруту-coursesidedit). <br/>
+- `<form action="/courses/edit" method="POST" class="course-form"></form>` -  *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/courses/edit'`, который выполняет функции контроллера редактирования курса. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/courses/edit'`](controllers.md/#метод-запроса-get-по-маршруту-coursesidedit). <br/>
 - `<div class="input-field"></div>` - контейнер с классом `iput-field`, который принимает `input` с названием курса.  <br/>
 - `<input id="title" name="title" type="text" class="validate" required value="{{course.title}}">` - `input` содержащий ID `id="title"` поля ввода, его название `name="title"`, тип `type="text"`, класс `class="validate"` и обязательным атрибутом `required`, который должен наличивать значение заголовка курса `{{course.title}}`. <br/>
 - `<label for="title">Название курса</label>` - подсказывающий текст `Название курса` определяющийся для `input` с именем `title`. <br/>
@@ -1048,7 +1048,7 @@ module.exports = {
 - `<input type="hidden" name="id" value="{{course.id}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик проверки ID курса `{{@root.csrf}}`. <br/>
 - `<input type="hidden" name="_csrf" value="{{csrf}}">` - *возможность шаблонизатора `Handlebars`*. Cкрытый обработчик прав доступа авторизации `{{@root.csrf}}`. <br/>
 - `<button type="submit" class="btn btn-primary">Редактировать курс</button>` - кнопка выполняющая код контроллера запроса `post` по маршруту `'/courses/edit'`. <br/>
-- `<form action="/courses/remove" method="POST"></form>` - *возможность шаблонизатора `Handlebars`*. Тип запроса `post` по маршруту `'/courses/edit'`, который выполняет функции контроллера удаление курса. Подробнее о данном контроллере смотрите [Тип запроса `post` по маршруту `'/courses/remove'`](controllers.md/#тип-запроса-post-по-маршруту-coursesremove). <br/>
+- `<form action="/courses/remove" method="POST"></form>` - *возможность шаблонизатора `Handlebars`*. Метод запроса `post` по маршруту `'/courses/edit'`, который выполняет функции контроллера удаление курса. Подробнее о данном контроллере смотрите [Метод запроса `post` по маршруту `'/courses/remove'`](controllers.md/#метод-запроса-post-по-маршруту-coursesremove). <br/>
 
 Итоговый вид страницы "Редактировать курс": <br/>
 

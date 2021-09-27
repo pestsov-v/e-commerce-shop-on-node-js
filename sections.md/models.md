@@ -137,7 +137,7 @@ const Course = require('../models/course')
 - `img: req.body.img` - ключ картинки, который принимает значение картинки приходящую в запросе `post`. <br/>
 - `userId: req.user` - ключ пользователя, который принимает значение ID пользователя создавшего курс, приходящий в запросе `post`. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/add'](controllers.md#тип-запроса-post-по-маршруту-add). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/add'](controllers.md#метод-запроса-post-по-маршруту-add). <br/>
 
 ---
 
@@ -156,7 +156,7 @@ const Course = require('../models/course')
 - `req.user.addToCart()` - функция модели `User` - `addToCart` принимающая аргумент - `course`. Подробно о данной функции смотрите в разделе [Модель "User"](#модель-user). <br/>
 - `res.redirect()` - метод `redirect` объекта ответа `response`, который перенаправляет пользователя на страницу с маршрутом `'/card'`. <br/>
   
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/card/add'](controllers.md#тип-запроса-post-по-маршруту-cardadd). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/card/add'](controllers.md#метод-запроса-post-по-маршруту-cardadd). <br/>
 
 ---
 
@@ -177,7 +177,7 @@ const Course = require('../models/course')
 - `populate` - метод проверяющий, включают ли данные `userId` и `email name` после чего возвращает только те документы, в которых наявны `userId` и `email name`. <br/>
 - `select` - метод возвращающий только значения ключей: `price`, `title` и `img`. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса get по маршруту '/courses'](controllers.md#тип-запроса-get-по-маршруту-courses). <br/>
+Подробнее о данном контролере смотрите [Метод запроса get по маршруту '/courses'](controllers.md#метод-запроса-get-по-маршруту-courses). <br/>
 
 ---
 
@@ -205,7 +205,7 @@ const course = await Course.findById(req.params.id)
 - `res.render('course-edit', {})` - метод `render` объекта `response`, который визуализирует данные приходящие из файла `course-edit.hbs`. <br/>
 - `course` - ключ принимающий одноименное значение, в котором хранится данные одного курса определенного по ID. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса get по маршруту '/courses/:id/edit'](controllers.md#тип-запроса-get-по-маршруту-coursesidedit). <br/>
+Подробнее о данном контролере смотрите [Метод запроса get по маршруту '/courses/:id/edit'](controllers.md#метод-запроса-get-по-маршруту-coursesidedit). <br/>
 
 ---
 
@@ -230,7 +230,7 @@ const course = await Course.findById(id)
 - `Object.assign()` - метод `assign` глобального объекта `Object`, который принимает объект курса `course` с опредённым ID и коппирует все перечислимые свойста `course` в целевой объект - `req.body`. <br/>
 - `course.save()` - метод `save` объекта `course` сохраняющий данные в базе данных `MongoDB`. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса get по маршруту '/courses/:id/edit'](controllers.md#тип-запроса-get-по-маршруту-coursesidedit). <br/>
+Подробнее о данном контролере смотрите [Метод запроса get по маршруту '/courses/:id/edit'](controllers.md#метод-запроса-get-по-маршруту-coursesidedit). <br/>
 
 ---
 
@@ -253,7 +253,7 @@ const Course = require('../models/course')
   - `userId` - значение ID пользователя сравнивающее значение ID пользователя в получаемом запросе - `req.user._id`. <br/>
 - `res.redirect()` - метод `redirect` объекта ответа `response`перенаправление на страницу с маршрутом `'/courses'`. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/courses/remove'](controllers.md#тип-запроса-post-по-маршруту-coursesremove). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/courses/remove'](controllers.md#метод-запроса-post-по-маршруту-coursesremove). <br/>
 
 ---
 
@@ -362,7 +362,7 @@ const Order = require('../models/order')
   - `c.price` - цена курса. <br/>
   - `c.count` - количество курсов покупаемых пользователем. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса get по маршруту '/orders'](controllers.md#тип-запроса-get-по-маршруту-orders). <br/>
+Подробнее о данном контролере смотрите [Метод запроса get по маршруту '/orders'](controllers.md#метод-запроса-get-по-маршруту-orders). <br/>
 
 ---
 
@@ -391,7 +391,7 @@ const Order = require('../models/order')
 - `courses` - ключ принимающий одноименный массив курсов `courses`. <br/>
 - `order.save()` - метод `save` объекта `order` сохраняющий данные в базе данных MongoDB. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/orders'](controllers.md#тип-запроса-post-по-маршруту-orders). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/orders'](controllers.md#метод-запроса-post-по-маршруту-orders). <br/>
 
 ⬆️ [К оглавлению раздела "Модели"](#оглавление-раздела) <br/>
 ↩️ [К оглавлению документации](../README.md) <br/> <br/>
@@ -554,12 +554,12 @@ const User = require('../models/user')
 ```
 Где:  <br/>
 - `User.findById()` - метод `findById` модели `User`, который ищет пользователя по входящему запросу с ID `req.user._id` из коллекции `User` и возвращает эти данные. <br/>
-- `Object.assign()` - метод `assign` глобального объекта `Object`, который включает данные документа `user`, которые подставляются в целевой объект `toChange` и который принимает два параметра:
+- `Object.assign()` - метод `assign` глобального объекта `Object`, который включает данные документа `user`, которые подставляются в целевой объект `toChange` и который принимает два аргумента:
   - `user` - объект пользователя найденого в базе данных по ID пользователя. <br/>
   - `toChange` - объект, внутри которого определны ряд клюей пользователя в том числе, `name`, который принимает значение `req.body.name`. <br/>
 - `user.save()` - метод `save` объекта `user` сохраняющий данные в базе данных MongoDB. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/auth/password'](controllers.md#тип-запроса-post-по-маршруту-authpassword). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/password'](controllers.md#метод-запроса-post-по-маршруту-authpassword). <br/>
 
 ---
 
@@ -586,7 +586,7 @@ const User = require('../models/user')
 - `req.session.isAuthenticated` - свойство авторизации `isAuthenticated`, объекта сессии `session`, которое принимает boolean значение `true`, что определяет активность сессии. <br/>
 - `req.session.save(err => {})` - функция `save` сохраняющая состояние сессии `session`. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/auth/login'](controllers.md#тип-запроса-post-по-маршруту-authlogin). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/login'](controllers.md#метод-запроса-post-по-маршруту-authlogin). <br/>
 
 ---
 
@@ -607,7 +607,7 @@ const User = require('../models/user')
 - `email, name, password: hashPassword, cart: {items: []}` - перечень как одноименных свойств ключ-значение(к примеру `email`) так и разноименных `password: hashPassword`. <br/>
 - `user.save()` - метод `save` объекта `course` сохраняющий данные в базе данных MongoDB. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/auth/register'](controllers.md#тип-запроса-post-по-маршруту-authregister). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/register'](controllers.md#метод-запроса-post-по-маршруту-authregister). <br/>
 
 ---
 
@@ -628,7 +628,7 @@ const User = require('../models/user')
 - `resetToken` - ключ-условие, которое заложено в тело метода и которое сравнивает `resetToken` с токеном `req.params.token`, который приходит с телом запроса `request`.  <br/>
 - `resetTokenExp` - ключ-условие, которое заложено в тело метода и которое сравнивает с помощью оператора `$gt` не привышает ли срок токена больше, чем время в которое выполняется запрос `{Date.now()}`. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса get по маршруту '/auth/password/:token'](controllers.md#тип-запроса-get-по-маршруту-authpasswordtoken). <br/>
+Подробнее о данном контролере смотрите [Метод запроса get по маршруту '/auth/password/:token'](controllers.md#метод-запроса-get-по-маршруту-authpasswordtoken). <br/>
 
 ---
 
@@ -652,7 +652,7 @@ const candidate = await User.findOne({email: req.body.email})
 - `candidate.resetTokenExp` - присвание свойству `resetTokenExp` объекта `candidate` значение срока жизни токена `Date.now() + 60 * 60 * 1000` <br/>
 - `candidate.save()` - метод `save` сохраняющий объект пользователя `candidate` в базе данных. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/auth/reset'](controllers.md#тип-запроса-post-по-маршруту-authreset). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/reset'](controllers.md#метод-запроса-post-по-маршруту-authreset). <br/>
 
 ---
 
@@ -682,7 +682,7 @@ const candidate = await User.findOne({email: req.body.email})
 - `user.resetTokenExp` - переопределение свойства `resetTokenExp` объекта `user` на значение - `undefined`. <br/>
 - `user.save()` - метод `save` сохраняющий объект пользователя `user` в базе данных. <br/>
 
-Подробнее о данном контролере смотрите [Тип запроса post по маршруту '/auth/password'](controllers.md#тип-запроса-post-по-маршруту-authpassword). <br/>
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/password'](controllers.md#метод-запроса-post-по-маршруту-authpassword). <br/>
 
 ---
 
