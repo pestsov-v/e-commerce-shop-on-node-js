@@ -292,7 +292,7 @@ const store = new MongoStore({
 
 ### connect-flash
 
-connect-flash необходим как специальная область сеанса, которая используется для хранения сообщений. Сообщения используется в связке с перенаправлениями во время действий авторизации. Сам connect-flash подключается в главном файле index.js после чего используется локально в контроллерах авторизации. Подробнее о контроллерах авторизации смотрите [Контроллеры страницы "Вход / Выход"](#контроллеры-страницы-вход--выход). Код подключения connect-flash в главный файл index.js:
+connect-flash необходим как специальная область сеанса, которая используется для хранения сообщений. Сообщения используется в связке с перенаправлениями во время действий авторизации. Сам connect-flash подключается в главном файле index.js после чего используется локально в контроллерах авторизации. Подробнее о контроллерах авторизации смотрите [Контроллеры страницы "Вход / Выход"](#контроллеры-страницы-вход--выход). Код подключения connect-flash в главном файле index.js:
 ```node
 const flash = require('connect-flash')
 app.use(flash())
@@ -514,9 +514,100 @@ router.post('/password', async (req, res) => {
 
 
 ### csurf
+
+csrf используется для защиты от подделки межасайтовых запросов (CSRF). Код подключения connect-flash в главный файл index.js:
 ```node
+const csrf = require('csurf')
 app.use(csrf())
 ```
+Использование csrf защиты выходит путём подключения скритого обработчика csrf в шаблони handlebars. Использование защиты в представлении add.hbs с методом запроса post по машруту /add:
+```handlebars
+<form action="/add" method="POST">
+  ...
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+  ...
+</form>  
+```
+Где: 
+- `form action="/add" method="POST"` - форма контроллера с методом запроса post по машруту /add.
+- <input type="hidden" name="_csrf" value="{{csrf}}"> - промежуточный обработчик csurf не отображающийся в представлении, но при этом обеспечивает создание токена. Этот токен проверяется по сеансу пользователя. 
+
+
+
+card.hbs
+```handlebars
+{{#each courses}}
+...
+<button 
+  class="btn btm-small js-remove" 
+  data-id="{{id}}"
+  data-csrf="{{@root.csrf}}"   
+  >Удалить</button>
+...
+{{/each}}
+
+<form action="/orders" method="POST"> 
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+</form> 
+```
+
+
+course-edit.hbs
+```handlebars
+<form action="/courses/edit" method="POST" class="course-form">
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+</form>
+```
+```handlebars
+<form action="/courses/remove" method="POST">
+ <input type="hidden" name="_csrf" value="{{csrf}}">
+</form>
+```
+
+courses.hbs
+```handlebars
+{{#if @root.isAuth}}
+  <form action="/card/add" method="POST">
+    <input type="hidden" name="_csrf" value="{{@root.csrf}}"> 
+  </form>
+{{/if}}
+```
+
+profile.hbs
+```handlebars
+<form action="/profile" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+</form>
+```
+
+auth/login.hbs
+```handlebars
+<form action="/auth/login" method="POST">
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+</form>
+```
+
+```handlebars
+<form action="/auth/register" method="POST" novalidate>
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+</form>
+```
+
+auth/password.hbs
+```handlebars
+ <form action="/auth/password" method="POST">
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+</form>
+```
+
+auth/password.hbs
+```handlebars
+ <form action="/auth/reset" method="POST">
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+</form>
+```
+
+
 
 ### compression
 
@@ -525,6 +616,7 @@ app.use(compression())
 ```
 
 ### fileMiddleware
+
 
 
 ```node
