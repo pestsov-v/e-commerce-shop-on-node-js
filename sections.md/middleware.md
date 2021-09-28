@@ -31,16 +31,29 @@
       - [Использование connect-flash в контроллере авторизации с методом запроса post по машруту /auth/reset](#использование-connect-flash-в-контроллере-авторизации-с-методом-запроса-post-по-машруту-authreset)
       - [Использование connect-flash в контроллере авторизации с методом запроса post по машруту /auth/password](#использование-connect-flash-в-контроллере-авторизации-с-методом-запроса-post-по-машруту-authpassword)
     - [csurf](#csurf)
+      - [Использование csurf в представлении страницы "Корзина"](#использование-csurf-в-представлении-страницы-корзина)
+      - [Использование csurf в представлении страницы одного курса](#использование-csurf-в-представлении-страницы-одного-курса)
+      - [Использование csurf в представлении страницы "Курсы"](#использование-csurf-в-представлении-страницы-курсы)
+      - [Использование csurf в представлении страницы "Профиль"](#использование-csurf-в-представлении-страницы-профиль)
+      - [Использование csurf в представлении страницы "Авторизация"](#использование-csurf-в-представлении-страницы-авторизация)
     - [compression](#compression)
     - [fileMiddleware](#filemiddleware)
+    - [nodemailer-sendgrid-transport](#nodemailer-sendgrid-transport)
+      - [Подключение всех зависимостей nodemailer-sendgrid-transport](#подключение-всех-зависимостей-nodemailer-sendgrid-transport)
+      - [Письмо подтверждающее успешную регистрацию](#письмо-подтверждающее-успешную-регистрацию)
+      - [Письмо смены пароля](#письмо-смены-пароля)
   - [Самописные промежуточные обработчики](#самописные-промежуточные-обработчики)
     - [auth](#auth)
     - [errorHandler](#errorhandler)
     - [registerValidators](#registervalidators)
+      - [Валидация регистрируемой почты](#валидация-регистрируемой-почты)
+      - [Валидация регистрируемого пароля](#валидация-регистрируемого-пароля)
+      - [Валидация подтверждения пароля](#валидация-подтверждения-пароля)
+      - [Валидация регистрируемого имени](#валидация-регистрируемого-имени)
+      - [Подключение промежуточного обработчика registerValidators](#подключение-промежуточного-обработчика-registervalidators)
     - [courseValidators](#coursevalidators)
     - [UserMiddleware](#usermiddleware)
     - [varMiddleware](#varmiddleware)
-  - [SendGrid](#sendgrid)
 
 
 ## Описание промежуточных обработчиков
@@ -48,6 +61,7 @@
 Промежуточные обработчики могут быть как внешними библиотеками так и написаны самим разработчиком. Одновременно с этим, сами промежуточные обработчики могут быть подключение к приложению глобально, так и локально, в зависимости от бизнес-логики.
 
 ### Пример глобального подключения промежуточного обработчика
+
 ```node
 const flash = require('connect-flash')
 app.use(flash())
@@ -64,6 +78,7 @@ const app = express()
 ---
 
 ### Пример локального промежуточного обработчика
+
 ```node
 const bcrypt = require('bcryptjs')
 
@@ -84,6 +99,7 @@ router.post('/login', async (req, res) => {
 ---
 
 ### Пример самописного промежуточного обработчика
+
 ```node
 module.exports = function(req, res, next) {
   if (!req.session.isAuthenticated) {
@@ -122,7 +138,7 @@ module.exports = function(req, res, next) {
 |   UserMiddleware   |  Глобально  |               Файл user.js               |          Организация допуска авторизированым пользователям          |
 |    varMiddleware   |  Глобально  |             Файл variables.js            |        Создание токена CSRF для авторизированого пользователя       |
 
-
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
 ↩️ [К оглавлению документации](../README.md) <br/> 
 
 ## Реализация библиотечных промежуточных обработчиков
@@ -211,6 +227,8 @@ router.post('/password', async (req, res) => {
 Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/password'](controllers.md#метод-запроса-post-по-маршруту-authpassword). <br/>
 Подробнее о реализации машрутизатора смотрите [Реализация маршрутов](routes.md#реализация-маршрутов). <br/>
 
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
 ---
 
 ### crypto 
@@ -231,6 +249,8 @@ router.post('/reset', (req, res) => {
 
 Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/reset'](controllers.md#метод-запроса-post-по-маршруту-authreset). <br/>
 Подробнее о реализации машрутизатора смотрите [Реализация маршрутов](routes.md#реализация-маршрутов). <br/>
+
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
 
 ---
 
@@ -256,6 +276,10 @@ app.use(helmet({
 - `...helmet.contentSecurityPolicy.getDefaultDirectives()` - объект директив по умолчанию. 
 - `"img-src": ["'self'", "https:"]` - ряд параметров для защиты подключаемых картинок.
 - `"script-src-elem": ["'self'", "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js", "'unsafe-inline'" ]` - ряд параметром для защиты подключаемых скриптов.
+
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+---
 
 ### session
 
@@ -289,6 +313,9 @@ const store = new MongoStore({
 - `collection: 'sessions'` - название коллекции сессий в базе данных MongoDB.
 - `uri: keys.MONGODB_URL` - URL путь соединения с базой данных MongoDB.
 
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+---
 
 ### connect-flash
 
@@ -509,9 +536,9 @@ router.post('/password', async (req, res) => {
 Подробнее о представлении, которое использует данные переданные вместе с методом render объекта ответа response смотрите [Вход / Регистрация](views.md#вход--регистрация). <br/>
 Подробнее о реализации машрутизатора смотрите [Реализация маршрутов](routes.md#реализация-маршрутов). <br/>
 
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
 ---
-
-
 
 ### csurf
 
@@ -532,8 +559,9 @@ app.use(csrf())
 - `form action="/add" method="POST"` - форма контроллера с методом запроса post по машруту /add.
 - <input type="hidden" name="_csrf" value="{{csrf}}"> - промежуточный обработчик csurf не отображающийся в представлении, но при этом обеспечивает создание токена. Этот токен проверяется по сеансу пользователя. 
 
+---
 
-
+#### Использование csurf в представлении страницы "Корзина"
 card.hbs
 ```handlebars
 {{#each courses}}
@@ -551,6 +579,9 @@ card.hbs
 </form> 
 ```
 
+---
+
+#### Использование csurf в представлении страницы одного курса
 
 course-edit.hbs
 ```handlebars
@@ -564,6 +595,10 @@ course-edit.hbs
 </form>
 ```
 
+---
+
+#### Использование csurf в представлении страницы "Курсы"
+
 courses.hbs
 ```handlebars
 {{#if @root.isAuth}}
@@ -573,12 +608,22 @@ courses.hbs
 {{/if}}
 ```
 
+---
+
+#### Использование csurf в представлении страницы "Профиль"
+
 profile.hbs
 ```handlebars
 <form action="/profile" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="_csrf" value="{{csrf}}">
 </form>
 ```
+
+---
+
+#### Использование csurf в представлении страницы "Авторизация" 
+
+**Раздел логин**
 
 auth/login.hbs
 ```handlebars
@@ -587,11 +632,16 @@ auth/login.hbs
 </form>
 ```
 
+**Раздел Регистрация**
+
 ```handlebars
 <form action="/auth/register" method="POST" novalidate>
   <input type="hidden" name="_csrf" value="{{csrf}}">
 </form>
 ```
+
+**Раздел сброса пароля**
+
 
 auth/password.hbs
 ```handlebars
@@ -599,6 +649,8 @@ auth/password.hbs
   <input type="hidden" name="_csrf" value="{{csrf}}">
 </form>
 ```
+
+**Раздел смены пароля**
 
 auth/password.hbs
 ```handlebars
@@ -608,16 +660,29 @@ auth/password.hbs
 ```
 
 
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/password'](controllers.md#метод-запроса-post-по-маршруту-authpassword). <br/>
+Подробнее о представлении, которое использует данные переданные вместе с методом render объекта ответа response смотрите [Вход / Регистрация](views.md#вход--регистрация). <br/>
+Подробнее о реализации машрутизатора смотрите [Реализация маршрутов](routes.md#реализация-маршрутов). <br/>
+
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+---
 
 ### compression
 
+compression необходим как модуль для сжатия gzip, чтобы уменьшенить размер тела ответа и соответственно, увеличить быстродействие веб-приложения. Код подключения промежуточного обработчика в главний файл index.js:
 ```node
+const compression = require('compression')
 app.use(compression())
 ```
 
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+---
+
 ### fileMiddleware
 
-
+fileMiddleware использует библиотеку multer для обработки загружаемых файлов. Код подключения и реализации логики обработки загружаемых картинок:
 
 ```node
 const multer = require('multer')
@@ -645,149 +710,93 @@ module.exports = multer({
   storage, fileFilter
 })
 ```
+Где:
+- `multer.diskStorage({})` -
+- `destination(req, file, cb) {}` -
+- `cb(null, 'images')` -
+- `filename(req, file, cb) {}` -
+- `cb(null, file.originalname)` -
+- `allowedTypes = ['image/png', 'image/jpg', 'image/jpeg']` -
+- `fileFilter = (req, file, cb) => {}` -
+- `if (allowedTypes.includes(file.mimetype)) {}` -
+- `cb(null, true)` -
+- `cb(null, false)` -
+- `multer({storage, fileFilter})` -
 
-
-
-## Самописные промежуточные обработчики
-
-### auth
-
+Подключение промежуточного обработчика в главный файл index.js
 ```node
-module.exports = function(req, res, next) {
-    if (!req.session.isAuthenticated) {
-        return res.redirect('/auth/login')
-    }
-
-    next()
-}
+const fileMiddleware = require('./midlleware/file')
+app.use(fileMiddleware.single('avatar'))
 ```
+Где:
+- `fileMiddleware.single('avatar')` - 
 
-### errorHandler
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
 
-```node
-module.exports = function(req, res, next) {
-    res.status(404).render('404', {
-        title: 'Страница не найдена'
-    })
-}
-```
+---
 
-### registerValidators
+### nodemailer-sendgrid-transport
+
+sendGrid необходим для отправки пользователю писем на почту, которую пользователь вводил при регистрации в следующих ситуациях:
 
 
-```node
-registerValidators = []
-```
-
-```node
-    body('email')
-    .isEmail()
-    .withMessage('Введите корректный email')
-    .custom(async (value, req) => {
-        try {
-            const user = await User.findOne({email: value})
-            if (user) {
-                return Promise.reject('Такой email уже занят')
-            }
-        } catch (e) {
-            console.log(e)
-        }
-      .normalizeEmail(),
-    })
-```
-
-```node
-    body('password', 'Пароль должен быть минимум 6 символов')
-    .isLength({min: 6, max: 56})
-    .isAlphanumeric()
-    .trim(),
-```
-
-```node
-    body('confirm')
-    .custom((value, {req}) => {
-        if (value !== req.body.password) {
-            throw new Error('Пароли должны совпадать')
-        }
-        return true
-    })
-    .trim()
-```
-
-```node
-...
-body('name')
-    .isLength({min: 3})
-    .withMessage('Имя не может быть короче трёх символов')
-    .trim()
-...
-```
-
-
-
-### courseValidators
-
-```node
-courseValidators = [
-    body('title').isLength({min: 3}).withMessage('Минимальная длина названия три символа').trim(),
-    body('price').isNumeric().withMessage('Введите корректную цену'),
-    body('img', 'Введите корректный Url картинки').isURL()
-]
-```
-
-
-### UserMiddleware
-
-module.exports = async function(req, res, next) {
-    if (!req.session.user) {
-        return next()
-    }
-    
-    req.user = await User.findById(req.session.user._id)
-    next()
-}
-
-### varMiddleware
-
-
-```node
-module.exports = function(req, res, next) {
-    res.locals.isAuth = req.session.isAuthenticated
-    res.locals.csrf = req.csrfToken()
-    next()
-}
-```
-
-
-
-
-
-
-
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-## SendGrid
-
-
-Все почтовые письма: 
 |         Тип письма        |                        Задача письма                         |
 | :-----------------------: | :----------------------------------------------------------: |
 | Подтверждение регистрации | Уведомить пользователя об подтверждении успешной регистрации |
-|   Восстановление пароля   | Прислать токен с ограниченным сроком жизни для смены пароль  |
+|   Восстановление пароля   | Прислать токен с ограниченным сроком жизни для смены пароля  |
 
-```node
+
+#### Подключение всех зависимостей nodemailer-sendgrid-transport
+
+nodemailer-sendgrid-transport подключается локально в контроллеры отвечающие за регистрацию и восстановление пароля пользователя. Код подключения сервиса nodemailer и промежуточного обработчика отправки писем nodemailer-sendgrid-transport в файл auth.js:
+```node 
 const nodemailer = require('nodemailer')
 const sendgrid = require('nodemailer-sendgrid-transport')
 ```
+Где:
+- `` -
+- `` -
 
+Подключение файлов с формой письма с уведомлением и подтверждении успешной регистрации и письма с уведомлением о смене пароля в файл auth.js:
 ```node
 const regEmail = require('../emails/registration')
 const resetEmail = require('../emails/reset')
 ```
+Где: 
+- `regEmail` -
+- `resetEmail` -
 
-regEmail
+Для создание механизма отправки писем необходимо связать сервис nodemailer и промежуточный обработчик sendGrid путём создания транспорта с уникалньым ключём авторизации в сервисе nodemailer. Код подключения уникального ключа nodemailer к промежуточному обработчику sendGrid:
+```node
+const transporter = nodemailer.createTransport(sendgrid({
+  auth: {api_key: keys.SENDGRID_API_KEY}
+}))
+```
+Где:
+- `nodemailer.createTransport(sendgrid({}))` -
+- `auth: {api_key: keys.SENDGRID_API_KEY}` -
+
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+#### Письмо подтверждающее успешную регистрацию
+
+В случае успешной регистрации контроллер регистрации с методом post по маршруту /auth/register отправляет данные нового пользователя в базу данных, а после отправляет письмо об успешной регистрации на почту, котору указатель пользователь. Часть кода контроллера работающего с промежуточным обработчиком nodemailer-sendgrid-transport:
+```node
+router.post('/register', registerValidators, async (req, res) => {
+    const {email, password, name} = req.body
+    ...
+    await user.save()
+    await transporter.sendMail(regEmail(email))
+    ...
+})
+```
+Где: 
+- `router.post('/register', registerValidators, async (req, res) => {})` -
+- `{email, password, name}` -
+- `user.save()` -
+- `transporter.sendMail(regEmail(email))` -
+
+Код формы письма успешной регистрации: 
 ```node
 module.exports = function(email) {
   return {
@@ -803,8 +812,37 @@ module.exports = function(email) {
   }
 }
 ```
+Где: 
+- `function(email) {}` - 
+- `return {}` - 
+- `to: email` - 
+- `from: keys.EMAIL_FROM` - 
+- `subject: 'Аккаунт создан'` - 
+- `html: ...` - 
 
-resetEmail
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/register'](controllers.md#метод-запроса-post-по-маршруту-authregister). <br/>
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+#### Письмо смены пароля
+
+В случае успешной регистрации контроллер регистрации с методом post по маршруту /auth/reset отправляет токен для сброса пароля, а после отправляет письмо с токеном сброса пароля на почту пользователя. Часть кода контроллера работающего с промежуточным обработчиком nodemailer-sendgrid-transport:
+```node
+router.post('/reset', (req, res) => {
+    ...
+    const token = buffer.toString('hex')
+    const candidate = await User.findOne({email: req.body.email})
+    ...
+    await transporter.sendMail(resetEmail(candidate.email, token))
+    ...
+})
+```
+Где:
+- `router.post('/reset', (req, res) => {})` -
+- `buffer.toString('hex')` -
+- `User.findOne({email: req.body.email})` -
+- `transporter.sendMail(resetEmail(candidate.email, token))` -
+
+Код формы письма сброса пароля: 
 ```node
 module.exports = function(email, token) {
     return {
@@ -822,41 +860,318 @@ module.exports = function(email, token) {
       }
 }
 ```
+Где: 
+- `function(email, token) {}` - 
+- `return {}` - 
+- `to: email` -
+- `from: keys.EMAIL_FROM` -
+- `subject: 'Восстановление доступа'` -
+- `html: ...` - 
 
+Подробнее о данном контролере смотрите [Метод запроса post по маршруту '/auth/reset'](controllers.md#метод-запроса-post-по-маршруту-authreset). <br/>
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
 
+---
+
+## Самописные промежуточные обработчики
+
+### auth
+
+auth необходим для проверки сессии пользователя. Код промежуточного обработчика:
 ```node
-const transporter = nodemailer.createTransport(sendgrid({
-  auth: {api_key: keys.SENDGRID_API_KEY}
-}))
+module.exports = function(req, res, next) {
+    if (!req.session.isAuthenticated) {
+        return res.redirect('/auth/login')
+    }
+
+    next()
+}
+```
+Где:
+- `if (!req.session.isAuthenticated) {}`
+- `return res.redirect('/auth/login')`
+- `next()`
+
+Подключение промежуточного обработчика происходит локально в соответствующие машрутизаторы. Перечень всех страниц с типами запроса и машрутизаторами показан в таблице "Все страницы с типами запросами и маршрутизаторами которые обрабатываются промежуточным обработчиком auth".
+
+*Все страницы с типами запросами и маршрутизаторами которые обрабатываются промежуточным обработчиком auth* <br/>
+|Название страницы| Метод запроса |    URL-путь запроса   |                                     Краткое описание                                     |
+| :-------------: | :---------: | :---------------------: | :--------------------------------------------------------------------------------------: |
+|     Главная     |     get     |           "/"           |                               Получение страницы "Главная"                               |
+|      Курсы      |     get     |        "/courses"       |               Получение страницы "Курсы" и получение всех курсов магазина                |
+|      Курсы      |     get     |      "/courses/:id"     |                            Получение одного курса из магазина                            |
+|      Курсы      |     get     |   "/courses/:id/edit"   |                     Получение страницы "Редактирование одного курса"                     |
+|      Курсы      |     post    |     "/courses/edit"     |                       Отправка редактируемых данных старого курса                        |
+|      Курсы      |     post    |    "/courses/remove"    |                              Удаление существующего курса                                |
+|  Добавить курс  |     get     |         "/add"          |                            Получение страницы "Добавить курс"                            |
+|  Добавить курс  |     post    |         "/add"          |   Отправка и сохранение одного курса и последующего перенаправления на страницу курсов   |
+|     Профиль     |     get     |       "/profile"        |                          Получение страницы профиля пользователя                         |
+|     Профиль     |     post    |       "/profile"        |                    Отправка редактируемых данных профиля пользователя                    |
+|     Корзина     |     get     |         "/card"         |                       Получение страницы "Корзина" и всех товаров                        |
+|     Корзина     |     post    |       "/card/add"       |       Добавление товара в "Корзину" c помощью клавиши "Купить" на странице "Курсы"       |
+|     Корзина     |    delete   |    "/card/remove/:id"   |                                   Удаление одного курса                                  |
+|     Заказы      |     get     |        "/orders"        |                               Получение страницы "Заказы"                                |
+|     Заказы      |     post    |        "/orders"        | Отправка данных на страницу "Заказы" через клавишу "Сделать заказ" на странице "Корзина" |
+
+Интеграция промежуточного обработчика auth в машрутизаторы выглядит следующим образом:
+```node
+router.post('/', auth,  async (req, res) => {})
+```
+Где: 
+- `router.post()` -
+  - `'/'` -
+  - `auth` -
+  - ` async (req, res) => {}` -
+
+Подробнее о контроллерах смотрите раздел [Контроллеры](controllers.md#контроллеры). <br/>
+Подробнее о маршрутизаторах смотрите раздел [Маршрутизация](routes.md#маршрутизация). <br/>
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+---
+
+### errorHandler
+
+errorHandler необходим для перенаправление на страницу 404, если пользователь делает get запрос на несуществующую страницу. Код промежуточного обработчика errorHandler:
+```node
+module.exports = function(req, res, next) {
+    res.status(404).render('404', {
+        title: 'Страница не найдена'
+    })
+}
+```
+Где:
+- `function(req, res, next) {}` -
+- `res.status(404)` -
+- `render('404', {}` -
+- `title: 'Страница не найдена'` -
+
+Подключение промежуточного обработчика errorHandler в главный файл index.js
+```node
+const errorHandler = require('./midlleware/error')
+app.use(errorHanler)
 ```
 
-
-
-auth.js route
-router post register
+Важно! обработчик должен быть подключён **после** маршрутизаторов (порядок подключения модулей машрутизаторов и промежуточного обработчика errorHandler в файл index.js неважен), чтобы сервер верно считывал код существующий страниц:
 ```node
-router.post('/register', registerValidators, async (req, res) => {
-    const {email, password, name} = req.body
-    ...
-    await transporter.sendMail(regEmail(email))
-    ...
-})
+...
+app.use('/', homeRoutes)
+app.use('/add', addRoutes)
+app.use('/courses', coursesRoutes)
+app.use('/card', cardRoutes)
+app.use('/orders', ordersRoutes)
+app.use('/auth', authRoutes)
+app.use('/profile', profileRoutes)
+
+app.use(errorHanler)
+```
+Где: 
+- `app.use('/', homeRoutes)` -
+- `app.use(errorHanler)` - 
+
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+---
+
+### registerValidators
+
+registerValidators валидирует данные, вводимые пользователем во время регистрации нового аккаунта, поскольку каждое поле имеет свои собственные условия валидации, то registerValidators это массив состоящий из объектов с различными свойствами:
+```node
+registerValidators = []
 ```
 
-auth.js route
-router post reset
+#### Валидация регистрируемой почты
+
+Код, отвечающий за валидацию регистрируемой почты
+```node
+    body('email')
+    .isEmail()
+    .withMessage('Введите корректный email')
+    .custom(async (value, req) => {
+        try {
+            const user = await User.findOne({email: value})
+            if (user) {
+                return Promise.reject('Такой email уже занят')
+            }
+        } catch (e) {
+            console.log(e)
+        }
+      .normalizeEmail()
+    })
+```
+Где:
+- `body('email')` -
+- `.isEmail()` -
+- `.withMessage('Введите корректный email')` -
+- `.custom(async (value, req) => {})` -
+- `User.findOne({email: value})` -
+- `Promise.reject('Такой email уже занят')` -
+- `.normalizeEmail()` - 
+
+#### Валидация регистрируемого пароля
+
+Код, отвечающий за валидацию регистрируемого пароля:
+```node
+...
+    body('password', 'Пароль должен быть минимум 6 символов')
+    .isLength({min: 6, max: 56})
+    .isAlphanumeric()
+    .trim()
+...
+```
+Где:
+- `body('password', 'Пароль должен быть минимум 6 символов')` -
+- `.isLength({min: 6, max: 56})` -
+- `.isAlphanumeric()` -
+- `.trim()` -
+
+#### Валидация подтверждения пароля
+
+Код отвечающий за валидацию подтверждение пароля:
+```node
+...
+    body('confirm')
+    .custom((value, {req}) => {
+        if (value !== req.body.password) {
+            throw new Error('Пароли должны совпадать')
+        }
+        return true
+    })
+    .trim()
+...
+```
+Где:
+- `body('confirm')` -
+- `.custom((value, {req}) => {})` -
+- `if (value !== req.body.password) {}` -
+- `throw new Error('Пароли должны совпадать')` -
+- `.trim()` - 
+
+#### Валидация регистрируемого имени
+
+Кода отвечающий за валидацию регистрируемого имени пользователя:
+```node
+...
+body('name')
+    .isLength({min: 3})
+    .withMessage('Имя не может быть короче трёх символов')
+    .trim()
+...
+```
+Где:
+- `body('name')` -
+- `.isLength({min: 3})` -
+- `.withMessage('Имя не может быть короче трёх символов')` - 
+- `.trim()`
+
+#### Подключение промежуточного обработчика registerValidators 
+
+Подключение промежуточного обработчика происходит локально в маршрутизатор регистрации с методом запроса post:
+```node
+router.post('/register', registerValidators, async (req, res) => {})
+```
+Где: 
+- `router.post()` - 
+  - `'/register'` -
+  - `registerValidators` -
+  - `async (req, res) => {}` -
+
+Подробнее о данном контролере смотрите раздел [Метод запроса post по маршруту '/auth/register'](controllers.md#метод-запроса-post-по-маршруту-authregister). <br/>
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+---
+
+### courseValidators
+
+courseValidators валидирует данные вводимые при создании или редактировании одного курса, поскольку каждое поле имеет свои собственные условия валидации, то courseValidators это массив состоящий из объектов с различными свойствами:
+```node
+courseValidators = [
+    body('title').isLength({min: 3}).withMessage('Минимальная длина названия три символа').trim(),
+    body('price').isNumeric().withMessage('Введите корректную цену'),
+    body('img', 'Введите корректный Url картинки').isURL()
+]
+```
+Где:
+- `body('title')` -
+  - `.isLength({min: 3})` -
+  - `.withMessage('Минимальная длина названия три символа')` -
+  - `.trim()` -
+- `body('price')` -
+  - `.isNumeric()` -
+  - `.withMessage('Введите корректную цену')` -
+- `body('img', 'Введите корректный Url картинки')` -
+  - `.isURL()` -
+
+Подключение промежуточного обработчика происходит локально в соответствующие машрутизаторы. Перечень всех страниц с типами запроса и машрутизаторами показан в таблице "Все страницы с типами запросами и маршрутизаторами которые обрабатываются промежуточным обработчиком courseValidators".
+
+*Все страницы с типами запросами и маршрутизаторами которые обрабатываются промежуточным обработчиком courseValidators* <br/>
+|Название страницы| Метод запроса |    URL-путь запроса     |                                     Краткое описание                                     |
+| :-------------: | :-----------: | :---------------------: | :--------------------------------------------------------------------------------------: |
+|      Курсы      |      post     |     "/courses/edit"     |                       Отправка редактируемых данных старого курса                        |
+|  Добавить курс  |      post     |         "/add"          |   Отправка и сохранение одного курса и последующего перенаправления на страницу курсов   |
+
+Интеграция промежуточного обработчика courseValidators в машрутизаторы выглядит следующим образом:
+```node
+router.post('/', auth,  async (req, res) => {})
+```
+Где: 
+- `router.post()` -
+  - `'/'` -
+  - `auth` -
+  - ` async (req, res) => {}` -
+
+Подробнее о контроллерах смотрите раздел [Контроллеры](controllers.md#контроллеры). <br/>
+Подробнее о маршрутизаторах смотрите раздел [Маршрутизация](routes.md#маршрутизация). <br/>
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
+---
+
+### UserMiddleware
+
+UserMiddleware необходим для организации сесии для одного пользователя. Код предоставления сесии для одного пользователя:
 
 ```node
-router.post('/reset', (req, res) => {
-    ...
-    const token = buffer.toString('hex')
-    const candidate = await User.findOne({email: req.body.email})
-    ...
-    await transporter.sendMail(resetEmail(candidate.email, token))
-    ...
-})
+module.exports = async function(req, res, next) {
+    if (!req.session.user) {
+        return next()
+    }
+    
+    req.user = await User.findById(req.session.user._id)
+    next()
+}
+```
+Где:
+- `function(req, res, next) {})` -
+- `if (!req.session.user) {}` -
+- `req.user = await User.findById(req.session.user._id)` -
+- `next()` -
+
+
+Подключение промежуточного обработчика UserMiddleware из файла user.js в главный файл index.js:
+```node
+const UserMiddleware = require('./midlleware/user')
+app.use(UserMiddleware)
 ```
 
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
 
+---
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### varMiddleware
+
+varMiddleware необходим для присванивание значений авторизации, которые в представлениях будут организовывать условия для визуализации тех или иных данных. Код промежуточного обработчика:
+```node
+module.exports = function(req, res, next) {
+    res.locals.isAuth = req.session.isAuthenticated
+    res.locals.csrf = req.csrfToken()
+    next()
+}
+```
+
+Подключение промежуточного обработчика varMiddleware из файла variables.js в главный файл index.js:
+```node
+const varMiddleware = require('./midlleware/variables')
+app.use(UserMiddleware)
+```
+
+↩️ [К оглавлению раздела](#оглавление-раздела) <br/> 
+
