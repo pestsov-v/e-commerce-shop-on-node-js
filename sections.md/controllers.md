@@ -890,7 +890,7 @@ price: computePrice(courses)
 ```
 Где: <br/>
 - `price` - ключ принимающий результат функции computePrice. <br/>
-- `computePrice()` - функция принимающая массив курсов 'courses' для последующего расчёта внутри функции computePrice(). <br/>
+- `computePrice()` - функция принимающая массив курсов 'courses' для последующего расчёта суммі стоимости всех курсов. <br/>
 
 *Функция computePrice:* <br/>
 ```node
